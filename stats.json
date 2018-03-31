@@ -1,0 +1,116 @@
+{
+  "assetsByChunkName": {
+    "component---src-layouts-index-tsx": [
+      "component---src-layouts-index-tsx-51e57c24a5932fb770ff.js",
+      "component---src-layouts-index-tsx-51e57c24a5932fb770ff.js.map"
+    ],
+    "component---src-templates-post-tsx": [
+      "component---src-templates-post-tsx-04fbd3f260925fbb099f.js",
+      "component---src-templates-post-tsx-04fbd3f260925fbb099f.js.map"
+    ],
+    "path---tags": [
+      "path---tags-9d396a1265c25d77a34a.js",
+      "path---tags-9d396a1265c25d77a34a.js.map"
+    ],
+    "path---": [
+      "path----d3e644d3ebd31218a805.js",
+      "path----d3e644d3ebd31218a805.js.map"
+    ],
+    "path---tags-queue": [
+      "path---tags-queue-0d0790c422e7001f767f.js",
+      "path---tags-queue-0d0790c422e7001f767f.js.map"
+    ],
+    "component---src-pages-tags-tsx": [
+      "component---src-pages-tags-tsx-12e9bb77d1cf271b90c9.js",
+      "component---src-pages-tags-tsx-12e9bb77d1cf271b90c9.js.map"
+    ],
+    "component---node-modules-gatsby-plugin-offline-app-shell-js": [
+      "component---node-modules-gatsby-plugin-offline-app-shell-js-5c4c5a0f7af9dc69d6d7.js",
+      "component---node-modules-gatsby-plugin-offline-app-shell-js-5c4c5a0f7af9dc69d6d7.js.map"
+    ],
+    "path---mock-article": [
+      "path---mock-article-0386831568d867b5811f.js",
+      "path---mock-article-0386831568d867b5811f.js.map"
+    ],
+    "path---index": [
+      "path---index-d7d5f56d686a28adf4bc.js",
+      "path---index-d7d5f56d686a28adf4bc.js.map"
+    ],
+    "component---src-pages-about-tsx": [
+      "component---src-pages-about-tsx-4a239d3523029185152d.js",
+      "component---src-pages-about-tsx-4a239d3523029185152d.js.map"
+    ],
+    "commons": [
+      "commons-a4508e8b006a525c8fb0.js",
+      "build-js-styles.css",
+      "commons-a4508e8b006a525c8fb0.js.map",
+      "build-js-styles.css.map"
+    ],
+    "path---monads": [
+      "path---monads-491a7b4ca49db633d985.js",
+      "path---monads-491a7b4ca49db633d985.js.map"
+    ],
+    "component---src-pages-404-tsx": [
+      "component---src-pages-404-tsx-c3f1179ef31e3033d235.js",
+      "component---src-pages-404-tsx-c3f1179ef31e3033d235.js.map"
+    ],
+    "path---404-html": [
+      "path---404-html-a0e39f21c11f6a62c5ab.js",
+      "path---404-html-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "component---src-pages-repositories-tsx": [
+      "component---src-pages-repositories-tsx-37dfd866aca28318d695.js",
+      "component---src-pages-repositories-tsx-37dfd866aca28318d695.js.map"
+    ],
+    "path---tags-monads": [
+      "path---tags-monads-5e6d8d9430811a4e5601.js",
+      "path---tags-monads-5e6d8d9430811a4e5601.js.map"
+    ],
+    "path---repositories": [
+      "path---repositories-6544ac236bb7afa3cf0a.js",
+      "path---repositories-6544ac236bb7afa3cf0a.js.map"
+    ],
+    "path---tags-non-blocking": [
+      "path---tags-non-blocking-bcd612996248850c70b4.js",
+      "path---tags-non-blocking-bcd612996248850c70b4.js.map"
+    ],
+    "path---offline-plugin-app-shell-fallback": [
+      "path---offline-plugin-app-shell-fallback-a0e39f21c11f6a62c5ab.js",
+      "path---offline-plugin-app-shell-fallback-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "component---src-pages-index-tsx": [
+      "component---src-pages-index-tsx-1b22a70431f3672608ec.js",
+      "component---src-pages-index-tsx-1b22a70431f3672608ec.js.map"
+    ],
+    "path---non-blocking-queue": [
+      "path---non-blocking-queue-e93ad41bed3593e2198a.js",
+      "path---non-blocking-queue-e93ad41bed3593e2198a.js.map"
+    ],
+    "app": [
+      "app-bdd1354c3354f03884b1.js",
+      "build-js-styles.css",
+      "app-bdd1354c3354f03884b1.js.map",
+      "build-js-styles.css.map"
+    ],
+    "path---tags-random": [
+      "path---tags-random-248e6c7d20ccdc2f3a81.js",
+      "path---tags-random-248e6c7d20ccdc2f3a81.js.map"
+    ],
+    "path---tags-scala": [
+      "path---tags-scala-18c895b4a9a2822ff0e3.js",
+      "path---tags-scala-18c895b4a9a2822ff0e3.js.map"
+    ],
+    "path---404": [
+      "path---404-a0e39f21c11f6a62c5ab.js",
+      "path---404-a0e39f21c11f6a62c5ab.js.map"
+    ],
+    "component---src-templates-tags-tsx": [
+      "component---src-templates-tags-tsx-fe121a48e0424f9eb760.js",
+      "component---src-templates-tags-tsx-fe121a48e0424f9eb760.js.map"
+    ],
+    "path---about": [
+      "path---about-7a621110360ebafb502e.js",
+      "path---about-7a621110360ebafb502e.js.map"
+    ]
+  }
+}

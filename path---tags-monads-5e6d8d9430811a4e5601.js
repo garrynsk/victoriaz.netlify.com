@@ -1,0 +1,2 @@
+webpackJsonp([0xb3a4940bce48],{783:function(a,t){a.exports={data:{allMarkdownRemark:{totalCount:1,edges:[{node:{frontmatter:{title:"What are they, monads, angels or demons?",date:"March 26, 2018",path:"/monads"}}}]}},pathContext:{tag:"monads"}}}});
+//# sourceMappingURL=path---tags-monads-5e6d8d9430811a4e5601.js.map
