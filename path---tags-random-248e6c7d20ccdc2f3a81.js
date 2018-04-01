@@ -1,2 +1,2 @@
-webpackJsonp([0xdcbbbbc422b6],{786:function(t,a){t.exports={data:{allMarkdownRemark:{totalCount:1,edges:[{node:{frontmatter:{title:"Random text generator",date:"March 17, 2018",path:"/mock-article"}}}]}},pathContext:{tag:"random"}}}});
+webpackJsonp([0xdcbbbbc422b6],{770:function(t,a){t.exports={data:{allMarkdownRemark:{totalCount:1,edges:[{node:{frontmatter:{title:"Random text generator",date:"March 17, 2018",path:"/mock-article"}}}]}},pathContext:{tag:"random"}}}});
 //# sourceMappingURL=path---tags-random-248e6c7d20ccdc2f3a81.js.map
