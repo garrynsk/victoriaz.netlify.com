@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css?family=Share+Tech+Mono');
+@import url('https://fonts.googleapis.com/css?family=Cutive+Mono');
+@import './normalize.css';
+@import './code-highlight-scala.css';
+
+.blur {
+
+    filter: blur(10px);
+    -webkit-filter: blur(10px);
+
+}
+
+:focus {
+    outline: none;
+
+}
+
+
+a {
+    color: #000;
+    text-decoration: none;
+}
+
+a:link {
+    color: #000;
+}
+
+a:hover {
+    color: #F50057;
+}
+
+body {
+    background-color: #FFF;
+}
