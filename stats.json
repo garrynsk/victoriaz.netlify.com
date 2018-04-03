@@ -1,8 +1,8 @@
 {
   "assetsByChunkName": {
     "component---src-layouts-index-tsx": [
-      "component---src-layouts-index-tsx-56892a5277e34bf219ac.js",
-      "component---src-layouts-index-tsx-56892a5277e34bf219ac.js.map"
+      "component---src-layouts-index-tsx-6b4fda20028a823a00a1.js",
+      "component---src-layouts-index-tsx-6b4fda20028a823a00a1.js.map"
     ],
     "component---src-templates-post-tsx": [
       "component---src-templates-post-tsx-8d7398c0a7c461b24c80.js",
@@ -13,8 +13,8 @@
       "path---tags-9d396a1265c25d77a34a.js.map"
     ],
     "path---": [
-      "path----6a94f2ef9ed16c3532c6.js",
-      "path----6a94f2ef9ed16c3532c6.js.map"
+      "path----0e14b3065b5a0271c112.js",
+      "path----0e14b3065b5a0271c112.js.map"
     ],
     "path---tags-queue": [
       "path---tags-queue-0d0790c422e7001f767f.js",
@@ -29,12 +29,12 @@
       "component---node-modules-gatsby-plugin-offline-app-shell-js-5c4c5a0f7af9dc69d6d7.js.map"
     ],
     "path---mock-article": [
-      "path---mock-article-e2771a282b289352551b.js",
-      "path---mock-article-e2771a282b289352551b.js.map"
+      "path---mock-article-b597052f55577ae72b76.js",
+      "path---mock-article-b597052f55577ae72b76.js.map"
     ],
     "path---index": [
-      "path---index-afb852ad83f4d7ba7618.js",
-      "path---index-afb852ad83f4d7ba7618.js.map"
+      "path---index-920cc2cf1cc9f7e4138c.js",
+      "path---index-920cc2cf1cc9f7e4138c.js.map"
     ],
     "component---src-pages-about-tsx": [
       "component---src-pages-about-tsx-e03eee5de0ae551a72c7.js",
@@ -42,11 +42,13 @@
     ],
     "commons": [
       "commons-bf1b78c96ff5b2c0fda8.js",
-      "commons-bf1b78c96ff5b2c0fda8.js.map"
+      "build-js-styles.css",
+      "commons-bf1b78c96ff5b2c0fda8.js.map",
+      "build-js-styles.css.map"
     ],
     "path---monads": [
-      "path---monads-575ba5849fb6643eec53.js",
-      "path---monads-575ba5849fb6643eec53.js.map"
+      "path---monads-16623a2213062dd3bcdb.js",
+      "path---monads-16623a2213062dd3bcdb.js.map"
     ],
     "component---src-pages-404-tsx": [
       "component---src-pages-404-tsx-c3f1179ef31e3033d235.js",
@@ -57,8 +59,8 @@
       "path---404-html-a0e39f21c11f6a62c5ab.js.map"
     ],
     "component---src-pages-repositories-tsx": [
-      "component---src-pages-repositories-tsx-96c841eb9d62bad91d14.js",
-      "component---src-pages-repositories-tsx-96c841eb9d62bad91d14.js.map"
+      "component---src-pages-repositories-tsx-3521ae3fd5a4d5c47707.js",
+      "component---src-pages-repositories-tsx-3521ae3fd5a4d5c47707.js.map"
     ],
     "path---tags-monads": [
       "path---tags-monads-5e6d8d9430811a4e5601.js",
@@ -81,12 +83,14 @@
       "component---src-pages-index-tsx-7518440025c62a0ebdc4.js.map"
     ],
     "path---non-blocking-queue": [
-      "path---non-blocking-queue-e1f2f3e1d006a88813a8.js",
-      "path---non-blocking-queue-e1f2f3e1d006a88813a8.js.map"
+      "path---non-blocking-queue-e8032235f5327f387549.js",
+      "path---non-blocking-queue-e8032235f5327f387549.js.map"
     ],
     "app": [
-      "app-019daddd025f0ed00d9c.js",
-      "app-019daddd025f0ed00d9c.js.map"
+      "app-700fbea91ad817066f6d.js",
+      "build-js-styles.css",
+      "app-700fbea91ad817066f6d.js.map",
+      "build-js-styles.css.map"
     ],
     "path---tags-random": [
       "path---tags-random-248e6c7d20ccdc2f3a81.js",

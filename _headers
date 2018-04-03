@@ -1,0 +1,98 @@
+## Created with gatsby-plugin-netlify
+
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+/static/*
+  Cache-Control: max-age=31536000
+/offline-plugin-app-shell-fallback/
+  Link: </commons-bf1b78c96ff5b2c0fda8.js>; rel=preload; as=script
+  Link: </app-700fbea91ad817066f6d.js>; rel=preload; as=script
+  Link: </path---offline-plugin-app-shell-fallback-a0e39f21c11f6a62c5ab.js>; rel=preload; as=script
+  Link: </component---node-modules-gatsby-plugin-offline-app-shell-js-5c4c5a0f7af9dc69d6d7.js>; rel=preload; as=script
+  Link: </component---src-layouts-index-tsx-6b4fda20028a823a00a1.js>; rel=preload; as=script
+/404/
+  Link: </commons-bf1b78c96ff5b2c0fda8.js>; rel=preload; as=script
+  Link: </app-700fbea91ad817066f6d.js>; rel=preload; as=script
+  Link: </path---404-a0e39f21c11f6a62c5ab.js>; rel=preload; as=script
+  Link: </component---src-pages-404-tsx-c3f1179ef31e3033d235.js>; rel=preload; as=script
+  Link: </component---src-layouts-index-tsx-6b4fda20028a823a00a1.js>; rel=preload; as=script
+/about/
+  Link: </commons-bf1b78c96ff5b2c0fda8.js>; rel=preload; as=script
+  Link: </app-700fbea91ad817066f6d.js>; rel=preload; as=script
+  Link: </path---about-aff4d298ce87b95d78fe.js>; rel=preload; as=script
+  Link: </component---src-pages-about-tsx-e03eee5de0ae551a72c7.js>; rel=preload; as=script
+  Link: </component---src-layouts-index-tsx-6b4fda20028a823a00a1.js>; rel=preload; as=script
+/
+  Link: </commons-bf1b78c96ff5b2c0fda8.js>; rel=preload; as=script
+  Link: </app-700fbea91ad817066f6d.js>; rel=preload; as=script
+  Link: </path---index-920cc2cf1cc9f7e4138c.js>; rel=preload; as=script
+  Link: </component---src-pages-index-tsx-7518440025c62a0ebdc4.js>; rel=preload; as=script
+  Link: </component---src-layouts-index-tsx-6b4fda20028a823a00a1.js>; rel=preload; as=script
+/repositories/
+  Link: </commons-bf1b78c96ff5b2c0fda8.js>; rel=preload; as=script
+  Link: </app-700fbea91ad817066f6d.js>; rel=preload; as=script
+  Link: </path---repositories-44bfeef05df2f0f01bd6.js>; rel=preload; as=script
+  Link: </component---src-pages-repositories-tsx-3521ae3fd5a4d5c47707.js>; rel=preload; as=script
+  Link: </component---src-layouts-index-tsx-6b4fda20028a823a00a1.js>; rel=preload; as=script
+/tags/
+  Link: </commons-bf1b78c96ff5b2c0fda8.js>; rel=preload; as=script
+  Link: </app-700fbea91ad817066f6d.js>; rel=preload; as=script
+  Link: </path---tags-9d396a1265c25d77a34a.js>; rel=preload; as=script
+  Link: </component---src-pages-tags-tsx-91e18567df2a12d2cbd7.js>; rel=preload; as=script
+  Link: </component---src-layouts-index-tsx-6b4fda20028a823a00a1.js>; rel=preload; as=script
+/404.html
+  Link: </commons-bf1b78c96ff5b2c0fda8.js>; rel=preload; as=script
+  Link: </app-700fbea91ad817066f6d.js>; rel=preload; as=script
+  Link: </path---404-html-a0e39f21c11f6a62c5ab.js>; rel=preload; as=script
+  Link: </component---src-pages-404-tsx-c3f1179ef31e3033d235.js>; rel=preload; as=script
+  Link: </component---src-layouts-index-tsx-6b4fda20028a823a00a1.js>; rel=preload; as=script
+/non-blocking-queue
+  Link: </commons-bf1b78c96ff5b2c0fda8.js>; rel=preload; as=script
+  Link: </app-700fbea91ad817066f6d.js>; rel=preload; as=script
+  Link: </path---non-blocking-queue-e8032235f5327f387549.js>; rel=preload; as=script
+  Link: </component---src-templates-post-tsx-8d7398c0a7c461b24c80.js>; rel=preload; as=script
+  Link: </component---src-layouts-index-tsx-6b4fda20028a823a00a1.js>; rel=preload; as=script
+/monads
+  Link: </commons-bf1b78c96ff5b2c0fda8.js>; rel=preload; as=script
+  Link: </app-700fbea91ad817066f6d.js>; rel=preload; as=script
+  Link: </path---monads-16623a2213062dd3bcdb.js>; rel=preload; as=script
+  Link: </component---src-templates-post-tsx-8d7398c0a7c461b24c80.js>; rel=preload; as=script
+  Link: </component---src-layouts-index-tsx-6b4fda20028a823a00a1.js>; rel=preload; as=script
+/mock-article
+  Link: </commons-bf1b78c96ff5b2c0fda8.js>; rel=preload; as=script
+  Link: </app-700fbea91ad817066f6d.js>; rel=preload; as=script
+  Link: </path---mock-article-b597052f55577ae72b76.js>; rel=preload; as=script
+  Link: </component---src-templates-post-tsx-8d7398c0a7c461b24c80.js>; rel=preload; as=script
+  Link: </component---src-layouts-index-tsx-6b4fda20028a823a00a1.js>; rel=preload; as=script
+/tags/non-blocking/
+  Link: </commons-bf1b78c96ff5b2c0fda8.js>; rel=preload; as=script
+  Link: </app-700fbea91ad817066f6d.js>; rel=preload; as=script
+  Link: </path---tags-non-blocking-bcd612996248850c70b4.js>; rel=preload; as=script
+  Link: </component---src-templates-tags-tsx-80aa5df5a34cd08ef6cb.js>; rel=preload; as=script
+  Link: </component---src-layouts-index-tsx-6b4fda20028a823a00a1.js>; rel=preload; as=script
+/tags/queue/
+  Link: </commons-bf1b78c96ff5b2c0fda8.js>; rel=preload; as=script
+  Link: </app-700fbea91ad817066f6d.js>; rel=preload; as=script
+  Link: </path---tags-queue-0d0790c422e7001f767f.js>; rel=preload; as=script
+  Link: </component---src-templates-tags-tsx-80aa5df5a34cd08ef6cb.js>; rel=preload; as=script
+  Link: </component---src-layouts-index-tsx-6b4fda20028a823a00a1.js>; rel=preload; as=script
+/tags/scala/
+  Link: </commons-bf1b78c96ff5b2c0fda8.js>; rel=preload; as=script
+  Link: </app-700fbea91ad817066f6d.js>; rel=preload; as=script
+  Link: </path---tags-scala-18c895b4a9a2822ff0e3.js>; rel=preload; as=script
+  Link: </component---src-templates-tags-tsx-80aa5df5a34cd08ef6cb.js>; rel=preload; as=script
+  Link: </component---src-layouts-index-tsx-6b4fda20028a823a00a1.js>; rel=preload; as=script
+/tags/monads/
+  Link: </commons-bf1b78c96ff5b2c0fda8.js>; rel=preload; as=script
+  Link: </app-700fbea91ad817066f6d.js>; rel=preload; as=script
+  Link: </path---tags-monads-5e6d8d9430811a4e5601.js>; rel=preload; as=script
+  Link: </component---src-templates-tags-tsx-80aa5df5a34cd08ef6cb.js>; rel=preload; as=script
+  Link: </component---src-layouts-index-tsx-6b4fda20028a823a00a1.js>; rel=preload; as=script
+/tags/random/
+  Link: </commons-bf1b78c96ff5b2c0fda8.js>; rel=preload; as=script
+  Link: </app-700fbea91ad817066f6d.js>; rel=preload; as=script
+  Link: </path---tags-random-248e6c7d20ccdc2f3a81.js>; rel=preload; as=script
+  Link: </component---src-templates-tags-tsx-80aa5df5a34cd08ef6cb.js>; rel=preload; as=script
+  Link: </component---src-layouts-index-tsx-6b4fda20028a823a00a1.js>; rel=preload; as=script

@@ -1,0 +1,2 @@
+.expand{margin-left:"auto";animation:spinup .5s linear forwards}.expandOpen{margin-left:"auto";animation:spindown .5s linear forwards}@keyframes spinup{50%{transform:rotate(90deg)}to{transform:rotate(180deg)}}@keyframes spindown{0%{transform:rotate(180deg)}50%{transform:rotate(90deg)}to{transform:rotate(0deg)}}
+/*# sourceMappingURL=build-js-styles.css.map*/
