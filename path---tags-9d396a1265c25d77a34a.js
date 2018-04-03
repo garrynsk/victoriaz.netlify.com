@@ -1,2 +1,2 @@
-webpackJsonp([55702396619907],{774:function(t,a){t.exports={data:{site:{siteMetadata:{siteTitle:"VictoriaZ programming sketches"}},allMarkdownRemark:{group:[{fieldValue:"Scala",totalCount:2},{fieldValue:"monads",totalCount:1},{fieldValue:"non-blocking",totalCount:1},{fieldValue:"queue",totalCount:1},{fieldValue:"random",totalCount:1}]}},pathContext:{}}}});
+webpackJsonp([55702396619907],{767:function(t,a){t.exports={data:{site:{siteMetadata:{siteTitle:"VictoriaZ programming sketches"}},allMarkdownRemark:{group:[{fieldValue:"Scala",totalCount:2},{fieldValue:"monads",totalCount:1},{fieldValue:"non-blocking",totalCount:1},{fieldValue:"queue",totalCount:1},{fieldValue:"random",totalCount:1}]}},pathContext:{}}}});
 //# sourceMappingURL=path---tags-9d396a1265c25d77a34a.js.map

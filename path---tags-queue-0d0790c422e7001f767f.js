@@ -1,2 +1,2 @@
-webpackJsonp([79465324930463],{771:function(e,t){e.exports={data:{allMarkdownRemark:{totalCount:1,edges:[{node:{frontmatter:{title:"Non blocking single producer many consumers queue",date:"March 16, 2018",path:"/non-blocking-queue"}}}]}},pathContext:{tag:"queue"}}}});
+webpackJsonp([79465324930463],{764:function(e,t){e.exports={data:{allMarkdownRemark:{totalCount:1,edges:[{node:{frontmatter:{title:"Non blocking single producer many consumers queue",date:"March 16, 2018",path:"/non-blocking-queue"}}}]}},pathContext:{tag:"queue"}}}});
 //# sourceMappingURL=path---tags-queue-0d0790c422e7001f767f.js.map
