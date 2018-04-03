@@ -1,0 +1,2 @@
+webpackJsonp([0xa2868bfb69fc],{759:function(t,i){t.exports={data:{site:{siteMetadata:{siteUrl:"https://victoriaz.netlify.com",siteTitle:"VictoriaZ programming sketches",siteLogo:"/img/Flying_Herk_in_the_Clouds.svg"}}},pathContext:{}}}});
+//# sourceMappingURL=path---404-html-395e56397587cbbaeb00.js.map
