@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[VictoriaZ programming sketches]]></title><description><![CDATA[A Scala programming blog. Ideas, opinions and technologies.]]></description><link>https://victoriaz.netlify.com</link><generator>RSS for Node</generator><lastBuildDate>Tue, 03 Apr 2018 00:34:20 GMT</lastBuildDate><item><title><![CDATA[What are they, monads, angels or demons?]]></title><description><![CDATA[You’ve heard about them many times, but still not sure if you need them? Or maybe you use them every day and happy with it? In any case, you do not want to miss a chance to discuss them one more time. If it is so, let’s begin! Introduction First of…]]></description><link>https://victoriaz.netlify.comundefined</link><guid isPermaLink="true">https://victoriaz.netlify.comundefined</guid><pubDate>Mon, 26 Mar 2018 10:30:00 GMT</pubDate><content:encoded>&lt;p&gt;You’ve heard about them many times, but still not sure if you need them? Or maybe you use them every day and happy with it? In any case, you do not want to miss a chance to discuss them one more time. If it is so, let’s begin!&lt;/p&gt;
+&lt;h2 id=&quot;introduction&quot;&gt;&lt;a href=&quot;#introduction&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;First of all I’ll remind you how they look like.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;trait&lt;/span&gt; Monad&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;F&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;_&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; flatMap&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; B&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;fa&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; F&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;f&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; A &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; F&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; F&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;
+  
+  &lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; pure&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; A&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; F&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;!!!Monad laws&lt;/p&gt;
+&lt;p&gt;Misterious, aren’t they?..&lt;/p&gt;
+&lt;p&gt;No, they are not! You must be hit on them several times a day. When you do like this:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; scala&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;concurrent&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Future
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; scala&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;concurrent&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ExecutionContext&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Implicits&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;global
+
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; queryFromDatabase&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; List&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; nextQueryFromDatabase&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; List&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+  firstResult &lt;span class=&quot;token keyword&quot;&gt;&amp;lt;-&lt;/span&gt; Future&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;queryFromDatabase&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  
+  secondResult &lt;span class=&quot;token keyword&quot;&gt;&amp;lt;-&lt;/span&gt; Future&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;nextQueryFromDatabase&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;yield&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;firstResult &lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; secondResult&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;Or like this:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;  &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; listFirst &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; List&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; listSecond &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; List&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+listFirst&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;flatMap&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; valueFirst &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; listSecond&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;map &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; valueSecond &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; valueFirst &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; valueSecond &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;Nothing special, to be honest. But why are there generated so much buzz around them? Some people love them, some - hate them. Come on, they are simple lists, futures, options and nothing more!&lt;/p&gt;
+&lt;p&gt;Yes and no. Look here.&lt;/p&gt;
+&lt;p&gt;We can write code without monads at all. And there is nothing wrong with it, just another way to express your thoughts.&lt;/p&gt;
+&lt;p&gt;But notice, if the error occures, the program will crash and it is not a good user experience.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; queryFromDatabase&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; List&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; nextQueryFromDatabase&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; List&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; firstResult &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; queryFromDatabase
+
+&lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; secondResult &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; nextQueryFromDatabase
+
+&lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; result &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt; firstResult &lt;span class=&quot;token operator&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt; secondResult &lt;span class=&quot;token operator&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    
+    firstResult &lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; secondResult
+    
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token comment&quot;&gt;// Attention! The program will throw an error.&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;throw&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;error&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+  
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;throw&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;error&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;We can get rid of flat map in the second case too. Just loop over each of the lists and sum the numbers. &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; listFirst &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; List&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; listSecond &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; List&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;6&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;8&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Attention! Mutable value.&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; result&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; List&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; List&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;i &lt;span class=&quot;token keyword&quot;&gt;&amp;lt;-&lt;/span&gt; listFirst&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;j &lt;span class=&quot;token keyword&quot;&gt;&amp;lt;-&lt;/span&gt; listSecond&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;i &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; j&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt;result
+
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;Now it is hard to reason about the code. Somebody can change the state of the variable unintentionally, for example, on an another thread, and we will get a wrong result.&lt;/p&gt;
+&lt;p&gt;So, what do you think? It seems pretty obvious, that flatMap is a more consice and clever way to code. Is that all? Just a clear syntax? No, it isn’t.&lt;/p&gt;
+&lt;p&gt;Let’s elaborate. In both cases we had to use some unsafe technique: throw an error or use a mutable value. And a monad helped us to eliminate this. A monad can modify the value, isolating it from outside world in a container.&lt;/p&gt;
+&lt;p&gt;There are quite a few problems we can solve with monads. I won’t list them myself, but I will cite Bartosz Milewski’s great &lt;a href=&quot;https://bartoszmilewski.com/2016/11/30/monads-and-effects/&quot;&gt;article&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Here is a short list of similar problems, copied from &lt;a href=&quot;https://core.ac.uk/download/pdf/21173011.pdf&quot;&gt;Eugenio Moggi’s seminal paper&lt;/a&gt;, all of which are traditionally solved by abandoning the purity of functions.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Partiality: Computations that may not terminate&lt;/li&gt;
+&lt;li&gt;Nondeterminism: Computations that may return many results&lt;/li&gt;
+&lt;li&gt;Side effects: Computations that access/modify state
+a. Read-only state, or the environment
+b. Write-only state, or a log
+c. Read/write state&lt;/li&gt;
+&lt;li&gt;Exceptions: Partial functions that may fail&lt;/li&gt;
+&lt;li&gt;Continuations: Ability to save state of the program and then restore it on demand&lt;/li&gt;
+&lt;li&gt;Interactive Input&lt;/li&gt;
+&lt;li&gt;Interactive Output&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;What really is mind blowing is that all these problems may be solved using the same clever trick: turning to embellished functions &lt;em&gt;(monads, mine note)&lt;/em&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Thus, we can solve several important problems in two ways. Traditional one is cumbersome and unsafe. Monadic one respects explicitness and clarity. &lt;/p&gt;
+&lt;p&gt;More on the problems you can avoid with monads you can read in &lt;a href=&quot;https://philipnilsson.github.io/Badness10k/escaping-hell-with-monads/&quot;&gt;“Escaping Hell with Monads”&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;So, which approach to choose? Hey, take both!&lt;/p&gt;
+&lt;p&gt;Seriously, you don’t have to give up one thing for another. I belive so. Think different. We must understand when to go which way. Understanding will help up to see clearly rather than roam blindly between functional and imperative worlds.&lt;/p&gt;
+&lt;p&gt;
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/functional-62ac35d6e5414ea2a60cda52eb3531c6-029df.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; ; max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 44.38888888888889%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAIAAAC9o5sfAAAACXBIWXMAAAsSAAALEgHS3X78AAABoElEQVQoz31RTUsCURT1v/QHpE20iPYhuI4oCNoIriJXLaIWLSyUIJJKxcgiLUQJdFFZhuU4KqZDWGp+h41f44w6ztcbe+MUFUKHy+Pcyznv3fuuYvAvRBGMpvX8RQe/hkQxqh8G1EmQCTxLGYRslWVFOrSaCq79mAEAX/JfhnarmcYepWwwON/TxB8csEiUXZVHVTkT/POybCAaeBN/h6SYiZ/uaOxGDUUSUf/BpXm+2ahzvUr2SkklpqtJXS7lkcwcy4RvvTTdazdr5o0l5NpZyGB6rdJnXSCJWvo5dLw5mfDNJkMnAk8/BU254FwBO8ymvJLZZlzXqsfz+ZTHotepx6L3HvTWaVie2lmZwFAfhjrs2yqfbTFyZ6lXkFJEmwvMkKUjqW04mNO6e7a/VcMraMDtsmwW0onXhD/24L5xGcpvsY8S0sKz8YCpUX2h6uFW0UlT+WJ4qU93FHBUhmUZloc30X26z7Ly/J1er89wAxEIQOzSHEkS3W5H0jB8u01RZIPnGKltIAgwZI/07UMiDCHvVhB4WAZA/JZ8Lf8TB33XsttELBYAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;functional&quot;
+        title=&quot;&quot;
+        src=&quot;/static/functional-62ac35d6e5414ea2a60cda52eb3531c6-fb8a0.png&quot;
+        srcset=&quot;/static/functional-62ac35d6e5414ea2a60cda52eb3531c6-1a291.png 148w,
+/static/functional-62ac35d6e5414ea2a60cda52eb3531c6-2bc4a.png 295w,
+/static/functional-62ac35d6e5414ea2a60cda52eb3531c6-fb8a0.png 590w,
+/static/functional-62ac35d6e5414ea2a60cda52eb3531c6-526de.png 885w,
+/static/functional-62ac35d6e5414ea2a60cda52eb3531c6-fa2eb.png 1180w,
+/static/functional-62ac35d6e5414ea2a60cda52eb3531c6-08f6a.png 1770w,
+/static/functional-62ac35d6e5414ea2a60cda52eb3531c6-029df.png 1800w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    &lt;/p&gt;
+&lt;h2 id=&quot;its-all-about-pure-functons&quot;&gt;&lt;a href=&quot;#its-all-about-pure-functons&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;It’s all about… pure functons?&lt;/h2&gt;
+&lt;p&gt;Now we know that monads can magically rewrite functions into powerfull constructions, which eliminate almost all issues with plain functions. But which properties allow them to do it?&lt;/p&gt;
+&lt;p&gt;Ok, first of all, list some of these issues, which can be a real pain in the ass, one more time:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Functions can fail.&lt;/li&gt;
+&lt;li&gt;The value may be uncertain, when we are not sure if it exists at all.&lt;/li&gt;
+&lt;li&gt;The value can depend on a shared state.&lt;/li&gt;
+&lt;li&gt;Functions can produce effects.&lt;/li&gt;
+&lt;li&gt;Functions can be asyncronous, when the value exists in the future.&lt;/li&gt;
+&lt;li&gt;The function result can vary for the same input.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;What are common characteristics you see? We can’t reason about the result for sure. We need to know the state of the whole application to do it. You can never know how your program actually works. It is bad, it is very bad. &lt;/p&gt;
+&lt;p&gt;Can we invert this description? We want to be sure how the program works. We want to work with a part of an application in isolation to test it. We want to know, that every time, the function receives a result, it produces the same output. As you probably know, it is the definition of a pure function, which is ubiquitous in a functional programming.&lt;/p&gt;
+&lt;p&gt;I won’t write about what functional programming is, you can read it in &lt;a href=&quot;https://maryrosecook.com/blog/post/a-practical-introduction-to-functional-programming&quot;&gt;“A practical introduction to functional programming”&lt;/a&gt; by Mary Rose Cook. We will talk about less discussed topic: what’s the purpose of the pure functions and functional programming in general. &lt;/p&gt;
+&lt;p&gt;Some say it is just a matter of style. If you think like that, then I strongly advise you to stop reading this nonsence and verify if you know all words from &lt;a href=&quot;https://github.com/hemanth/functional-programming-jargon&quot;&gt;here&lt;/a&gt;. But if you love digging deeper, then follow me.&lt;/p&gt;
+&lt;p&gt;Since pure functions are tightly coupled with side effects, I’ll better explain what a side effect is.&lt;/p&gt;
+&lt;div class=&quot;reddit-embed&quot; data-embed-media=&quot;www.redditmedia.com&quot; data-embed-parent=&quot;false&quot; data-embed-live=&quot;false&quot; data-embed-uuid=&quot;78f29787-e078-4498-9f85-c0151a78eaac&quot; data-embed-created=&quot;2018-03-24T17:13:10.619Z&quot;&gt;&lt;a href=&quot;https://www.reddit.com/r/scala/comments/2898l1/functional_programming_what_are_side_effects/ci8p0bi/&quot;&gt;Comment&lt;/a&gt; from discussion &lt;a href=&quot;https://www.reddit.com/r/scala/comments/2898l1/functional_programming_what_are_side_effects/&quot;&gt;Functional Programming : What are side effects?&lt;/a&gt;.&lt;/div&gt;
+&lt;p&gt;From the &lt;a href=&quot;https://en.wikipedia.org/w/index.php?title=Side_effect_(computer_science)&quot;&gt;Side effect (computer science) - Wikipedia&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Absence of side effects is a necessary, but not sufficient, condition for referential transparency. Referential transparency means that an expression (such as a function call) can be replaced with its value; this requires that the expression has no side effects and is pure (always returns the same results on the same input). A function without side effects may be impure, for example if its output depends on the value of a global variable.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;For example:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// referential transparent function&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; sum&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;a&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  a &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; b
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+sum&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// true&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// function with side effect&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; sumIO&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;a&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Unit&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  println&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;a &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+sumIO&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// false &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;Thus, &lt;span class=&quot;underline&quot;&gt; a pure function can be with or without side effects &lt;/span&gt;, but &lt;a href=&quot;https://en.wikipedia.org/wiki/Pure_function&quot;&gt;evaluation of the result does not cause any semantically observable side effect or output, such as mutation of mutable objects or output to I/O devices&lt;/a&gt;. For example:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; pureFunction&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; y &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Math&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;rand&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  
+  x
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+pureFunction&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// always 2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;And &lt;span  class=&quot;underline&quot;&gt; a function without side effects can be impure.&lt;/span&gt; For example:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; x &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; impureFunction&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  x
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+impureFunction&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// 3&lt;/span&gt;
+
+x &lt;span class=&quot;token operator&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
+
+impureFunction&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// 4&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;Functions with I/O operations still can be pure. And here we hit into monads. IO monads, to be precise. In Haskell side-effects don’t actually execute, they return values instead. In Scala it is not so, as Scala doesn’t support lazy evaluation by default. But we can emulate this behaviour ourself easily. We have to implement effectful function in such a way that it returns result, which can substitute the function itself.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token comment&quot;&gt;// IO monad&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;trait&lt;/span&gt; IO&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; flatMap&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;f&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; A &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; IO&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; IO&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; 
+
+  &lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; map&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;f&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; A &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; IO&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; 
+      IO&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; f&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;pure&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; pure&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; A
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;object&lt;/span&gt; IO&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;token comment&quot;&gt;// f - is a function with effects&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; apply&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;f&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; A&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; IO&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; 
+    &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; IO&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    
+      &lt;span class=&quot;token comment&quot;&gt;// We do not actually execute effectful functions, &lt;/span&gt;
+      &lt;span class=&quot;token comment&quot;&gt;// we compose them instead&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; flatMap&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;g&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; A &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; IO&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; IO&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;
+        IO&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; g&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;f&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;pure&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+      
+      &lt;span class=&quot;token comment&quot;&gt;// Actual execution&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; pure&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; A &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; 
+        f&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token comment&quot;&gt;// Now the funtion is referential transparent&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; sum&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;a&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; b&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; IO&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  IO&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; println&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;a &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;;&lt;/span&gt; a &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; b&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+sum&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;flatMap&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;a &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; IO&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; a &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// returns IO{() =&gt; println(3); 6}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;It may seem, that all monads must be pure, as such is in Haskell. Be careful. Take into consideration that nothing is obvious in Scala. For example, Option is a monad and in Scala it is implemented something like this:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;sealed&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;abstract&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; Option&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; get&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; A
+
+  &lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; map&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;f&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; A &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; B&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Option&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;isEmpty&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; None &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; Some&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;f&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;get&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; flatMap&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;f&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; A &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; Option&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Option&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;B&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;
+      &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;isEmpty&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; None &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; f&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;get&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;object&lt;/span&gt; Option &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+  &lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; apply&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; A&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Option&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; 
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; None &lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt; Some&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;x&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; Some&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; A&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extends&lt;/span&gt; Option&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; get &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; value
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;object&lt;/span&gt; None &lt;span class=&quot;token keyword&quot;&gt;extends&lt;/span&gt; Option&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;Nothing&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; get &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; NoSuchElementException&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token string&quot;&gt;&quot;None.get&quot;&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;See anything misleading? Look at flatMap attentively. It is not lazy, it executes. What does it mean? That we can’t safely implement effectful operations with it. And if you type Option(println(4)), 4 will be outputed to the console.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;Option&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;println&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// prints 4&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;Same with Future, List, Try and other monads in Scala. So, &lt;span  class=&quot;underline&quot;&gt; while monads in scala still abide monad laws, they can’t be considered pure. &lt;/span&gt; So, functional programming is about pure functions and side effects, but monads are completely orthogonal concepts.&lt;/p&gt;
+&lt;p&gt;So, while monads are not about purity, they still can help us with the issues we listed in the beginning of the section.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Functions can fail. - Option/Try/Either monad.&lt;/li&gt;
+&lt;li&gt;The value may be uncertain, when we are not sure if it exists at all. - Maybe monad.&lt;/li&gt;
+&lt;li&gt;The value can depend on a shared state. - State monad.&lt;/li&gt;
+&lt;li&gt;Functions can produce effects. - IO monad.&lt;/li&gt;
+&lt;li&gt;Functions can be asyncronous, when the value exists in the future. - Future/Promise monad.&lt;/li&gt;
+&lt;li&gt;The function result can vary for the same input. - Random monad.&lt;/li&gt;
+&lt;li&gt;The value may exists, but there are more than one of them. - List monad.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;!!!We have to compose and it is hard.&lt;/p&gt;
+&lt;p&gt;
+  &lt;a
+    class=&quot;gatsby-resp-image-link&quot;
+    href=&quot;/static/Optimus_Prime-d2b972c3627279b0ed459eb6af9b1f26-c86e7.png&quot;
+    style=&quot;display: block&quot;
+    target=&quot;_blank&quot;
+    rel=&quot;noopener&quot;
+  &gt;
+  
+  &lt;span
+    class=&quot;gatsby-resp-image-wrapper&quot;
+    style=&quot;position: relative; display: block; ; max-width: 590px; margin-left: auto; margin-right: auto;&quot;
+  &gt;
+    &lt;span
+      class=&quot;gatsby-resp-image-background-image&quot;
+      style=&quot;padding-bottom: 128.85496183206106%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAaCAYAAAC3g3x9AAAACXBIWXMAAAsTAAALEwEAmpwYAAAGKklEQVRIx4VVe2xTZRS/ezCCY8AefW1d27X33r5vb9vbdr1rb29fW9etXRkbzR7tXmyjjPdTCSIEZAEUWCSgSJQEoyRqCG8EYlDUGP8wKoRAfCRADCKQGAygY+ux9+6hCxC/f87p7/vOr7/vfOeci7y8aQ2ya+tChFtvvrZCsHtLv27n5v5ZyHMWACBsKMj7q2PRSXxtS/zfQ0va5yL5AiNy8ehg9itrk+iewaXte7cv0N788fSsG1dO4NUsKRncvGl5Z+/KUOb4dC5m5aJFuUhtCx8/NDAmyOPxjP0jt8pzXsia8Lk1/OiPxVev3L62bev2h5s2LLs7uHUQSGfg98aubsN/FXfUhoiMybr0/pExILGgvWDVuiU05xfOyc3m7PXLPwxeOnMcmmJxIAgHvLi6H2gnNTpbIAYHwz5cvGjRyUN732hoikQ7mykzR4ioC2fmsjYrH4901ld/8FJrvIrzDw4dXn744Ltpu80/6vW2PsEwLN0Yaxj1ef1pC+NPCyr0wAbDkGiOQ119dNhgtZ5CNbr2KYlu8LJDIacLXL5QU7gm1kcYNb8RBJVRZxsxGtTp5nCGIBhJO73V4GaTozhO/1VUXDxCO+mrWpIEOYr+6mVcBxxazM8TzotFhnClApys+3akvu6sSiEBP0MN67ByQFWl4Kkk07UBHxhsjrSDotMkZgICw0Aslt5XZqyZNPW59RqTCVUEuEfJmRt2f1chK4HmxkA6tbALcFT2wGoxOzy0/aDNjIOF1IxqtfhosVgCmTCIJzrX0w77Mb0OB7Uae2AiSOXkdc+f2FNAqBX3cVExtDQwT7o6GsFo0t7LbM3k9qtZ+xGJaDaUCAqHpRUKUCmVOzi8ksRm6jWqV120tY77bdXhOYRSls0pnO4gNdcdKhmggoJhilIDSaiPjxfxdJ0W/xjHy0Fn1IzorRaQKVRt4xU+KQpFlVmcNZLmMWBw48pD82sZkIpmP6YrdRANuj7i8LffOiXpSA7cDXopEErtIwqDHzSEG2g2GOIJCNO0zKNlTxB7PMxEOz0ydLU1/EkRpaDFy9IkoQFnJa5pb+3sX5BohbZky8gssRVmFpqHpZgbCIf7Qy5OqSeyGa+X53A5x+u9py2Uw9mNa3ri9X4DCEuKoKxU8pCpolzJePSc0YACpicfV2hdD4uKFCOokQU5rv+Mi5kuQbNcDDu12ZtDTt4OxOh8j013QyYVg1ZRtiuTvzwvbb2F4ihoCfKWQCD/Sq1CgXL6weVxf8nFiCqUWRbKNZUwGWUm/WqaOKPHZWAm8J1cX0dq2F+qKs1gslpXGPVEvLcr8QDTGMDm8p7hFeYXZD81juooHdLbXs9feyARHQx6rDAjD2lK9S1baiRrwGi2glqvYFOpgeLaoO0bVUZxfhF5DdPUFXIxEpk76ynSVPc8nnD10kQ0FmGHQ9U2bXfHgksY5gSZUnuS26sJx6VzCkseCMVykKHsnXKMFnG4WGabShjLvI6nysr7TsoojISZ3nUrB9b3dnQAYTRBqbzyZt4MT0FDpHFzicAAuM4KqIbazp03mIw5zxvESIh1T/rrVy0525OMgkikzPSr846FsIuVctXVsmIcyqVa0JMKfjLhOiyTQ+zZhH2tzbx0WV52YaoncY/xVUG5CAeZ0LyGv1qR4FNThQE0+sq/hRhh4zC5jsp2eUPP/k44LAb+xXoSLW3RaAhYrx/MavqyvWh2PoerxAJbwMk+drNRIKrYAIdRnrEaLpEEphJ+fuHYBHHWlg1rv/ayHrDbfD/t3rqvbOLM0WP7hTE/c4/UkVA3r3sXh1WobdPUxmZ+XyyvGjt44ZMTyIurunn/+ytDuctTHd+6aR/Y2Yb3OMxdFcjjP2Sp+ZFwoBJwDZa2OHy387PkkyNLKPVMVehhaD5/Dqe+LBwM/2wxWzIDgDk9vs2norez+WQo6AahqAgqtEZQ6nyPZpVYlqhJ3wy+a2TOcYXnTiID/d25nL9h3dJtnckUYCY3uAOhi6XlsrzxVOQ47GSnjSIOSMul+zSkbX+gKXlKilu/UOodNXyBq8ixejx/4Qyyaf0KXsXBfa/X9/X1vEMyNWt2DO3iB+zA6o3I/6487aT7D4+4C/lpZUNUAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+    &gt;
+      &lt;img
+        class=&quot;gatsby-resp-image-image&quot;
+        style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
+        alt=&quot;Transformer&quot;
+        title=&quot;&quot;
+        src=&quot;/static/Optimus_Prime-d2b972c3627279b0ed459eb6af9b1f26-fb8a0.png&quot;
+        srcset=&quot;/static/Optimus_Prime-d2b972c3627279b0ed459eb6af9b1f26-1a291.png 148w,
+/static/Optimus_Prime-d2b972c3627279b0ed459eb6af9b1f26-2bc4a.png 295w,
+/static/Optimus_Prime-d2b972c3627279b0ed459eb6af9b1f26-fb8a0.png 590w,
+/static/Optimus_Prime-d2b972c3627279b0ed459eb6af9b1f26-c86e7.png 655w&quot;
+        sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
+      /&gt;
+    &lt;/span&gt;
+  &lt;/span&gt;
+  
+  &lt;/a&gt;
+    &lt;/p&gt;
+&lt;h2 id=&quot;monad-transformers&quot;&gt;&lt;a href=&quot;#monad-transformers&quot; aria-hidden=&quot;true&quot; class=&quot;anchor&quot;&gt;&lt;svg aria-hidden=&quot;true&quot; height=&quot;16&quot; version=&quot;1.1&quot; viewBox=&quot;0 0 16 16&quot; width=&quot;16&quot;&gt;&lt;path fill-rule=&quot;evenodd&quot; d=&quot;M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z&quot;&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/a&gt;Monad Transformers&lt;/h2&gt;
+&lt;p&gt;Again, I won’t explain, what monad transformers are. You can find answers in a nice article &lt;a href=&quot;https://blog.buildo.io/monad-transformers-for-the-working-programmer-aa7e981190e7&quot;&gt;Monad Transformers for the working programmer&lt;/a&gt; by Gabriele Petronella.&lt;/p&gt;
+&lt;p&gt;The main inference from it is that &lt;a href=&quot;http://blog.tmorris.net/posts/monads-do-not-compose/&quot;&gt;monads do not compose&lt;/a&gt;. For their composition you need monad transformers. Example:&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; getUserFromDB&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;id&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Future&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;User&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; getOrderFromDB&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;user&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; User&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Future&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;Order&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; findOrderByUserID&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;id&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Future&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;Order&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    user    &lt;span class=&quot;token keyword&quot;&gt;&amp;lt;-&lt;/span&gt; getUserFromDB&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;id&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    order &lt;span class=&quot;token keyword&quot;&gt;&amp;lt;-&lt;/span&gt; getOrderFromDB&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;user&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;yield&lt;/span&gt; order
+  
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;What if we don’t know if we have any orders?&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; getUserFromDB&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;id&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Future&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;User&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; getOrderFromDB&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;user&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; User&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Future&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;Option&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;Order&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;?&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; findOrderByUserID&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;id&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Future&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;Order&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    user  &lt;span class=&quot;token keyword&quot;&gt;&amp;lt;-&lt;/span&gt; getUserFromDB&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;id&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Future[User]&lt;/span&gt;
+    order &lt;span class=&quot;token keyword&quot;&gt;&amp;lt;-&lt;/span&gt; getOrderFromDB&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;user&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// Future[Option[Order]]&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;yield&lt;/span&gt; order
+  
+&lt;span class=&quot;token comment&quot;&gt;// Type error. Nothing like we expected.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;But we can use a monad transformer! &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; cats&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;data&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;OptionT&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; cats&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;std&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;future&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;_
+&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; findOrderByUserID&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;id&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Future&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;Option&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;Order&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    user    &lt;span class=&quot;token keyword&quot;&gt;&amp;lt;-&lt;/span&gt; OptionT&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;getUserFromDB&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;id&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    order &lt;span class=&quot;token keyword&quot;&gt;&amp;lt;-&lt;/span&gt; OptionT&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;getOrderFromDB&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;user&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;yield&lt;/span&gt; order&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;value
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;Great, now we are safe! Heh, not even close. When you enter the world of monad transformers, there is no way back. There exists a whole &lt;a href=&quot;http://github.com/haskell/mtl/tree/master/Control/Monad&quot;&gt;“mtl” library&lt;/a&gt; for them in Haskell. Haven’t seen anything like that in Scala though. And John A De Goes wrote a great article, which named &lt;a href=&quot;http://degoes.net/articles/only-one-io&quot;&gt;There Can Be Only One…IO Monad&lt;/a&gt;, leverage issues which occure, when we need to compose several monads together. &lt;/p&gt;
+&lt;p&gt;So, monad transformers are, literally, just monads wrapping other monads, which help us to compose monads. Nothing more.&lt;/p&gt;
+&lt;p&gt;!!! Problems with mtl: effects when combine monads, many monads.&lt;/p&gt;
+&lt;p&gt;Due to several problems, which accompany monad transformers, people introduced other approaches, such as Eff monad &lt;a href=&quot;ttps://rubenpieters.github.io/monadtransformer/cats/eff/2017/01/27/monadtransformer-vs-effmonad-1.html&quot;&gt;“From Monad Transformers to the Eff Monad”&lt;/a&gt;, Extensible effects &lt;a href=&quot;https://www.cs.indiana.edu/~sabry/papers/exteff.pdf&quot;&gt;“Extensible Effects An Alternative to Monad Transformers”&lt;/a&gt; by Oleg Kiselyov, Algebraic effects &lt;a href=&quot;http://www.eff-lang.org/handlers-tutorial.pdf&quot;&gt;An Introduction to Algebraic Effects and Handlers&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;!!!When we compose, it is overhead, because we can’t use fusion.
+!!! All of the problems can be solved in an imperative approach.
+JavaScript leverage it’s single thread model to write in an imperative style&lt;/p&gt;
+&lt;p&gt;So, it is necessarily to write in monadic style? No. Can we write it in imperative way? Yes. &lt;/p&gt;
+&lt;p&gt;clumsy&lt;/p&gt;</content:encoded></item><item><title><![CDATA[Random text generator]]></title><description><![CDATA[Resources exquisite set arranging moonlight sex him household had. Months had too ham cousin remove far spirit. She procuring the why performed continual improving. Civil songs so large shade in cause. Lady an mr here must neat sold. Children…]]></description><link>https://victoriaz.netlify.comundefined</link><guid isPermaLink="true">https://victoriaz.netlify.comundefined</guid><pubDate>Sat, 17 Mar 2018 10:30:00 GMT</pubDate><content:encoded>&lt;p&gt;Resources exquisite set arranging moonlight sex him household had. Months had too ham cousin remove far spirit. She procuring the why performed continual improving. Civil songs so large shade in cause. Lady an mr here must neat sold. Children greatest ye extended delicate of. No elderly passage earnest as in removed winding or. &lt;/p&gt;
+&lt;div class=&quot;fb-post&quot; data-href=&quot;https://www.facebook.com/20531316728/posts/10154009990506729/&quot; data-width=&quot;500&quot;&gt;&lt;/div&gt;
+&lt;p&gt;Indulgence announcing uncommonly met she continuing two unpleasing terminated. Now busy say down the shed eyes roof paid her. Of shameless collected suspicion existence in. Share walls stuff think but the arise guest. Course suffer to do he sussex it window advice. Yet matter enable misery end extent common men should. Her indulgence but assistance favourable cultivated everything collecting. &lt;/p&gt;
+&lt;p&gt;At every tiled on ye defer do. No attention suspected oh difficult. Fond his say old meet cold find come whom. The sir park sake bred. Wonder matter now can estate esteem assure fat roused. Am performed on existence as discourse is. Pleasure friendly at marriage blessing or.
+&lt;blockquote class=&quot;twitter-tweet&quot; data-lang=&quot;en&quot;&gt;&lt;p lang=&quot;en&quot; dir=&quot;ltr&quot;&gt;Typelevel Summit Boston 2018 has started! Come grab breakfast and coffee before diving into .&lt;a href=&quot;https://twitter.com/http4s?ref_src=twsrc%5Etfw&quot;&gt;@http4s&lt;/a&gt; with .&lt;a href=&quot;https://twitter.com/rossabaker?ref_src=twsrc%5Etfw&quot;&gt;@rossabaker&lt;/a&gt; at 9am !&lt;/p&gt;— typelevel.scala (@typelevel) &lt;a href=&quot;https://twitter.com/typelevel/status/976077627361505281?ref_src=twsrc%5Etfw&quot;&gt;March 20, 2018&lt;/a&gt;&lt;/blockquote&gt;&lt;/p&gt;
+&lt;p&gt;Ten the hastened steepest feelings pleasant few surprise property. An brother he do colonel against minutes uncivil. Can how elinor warmly mrs basket marked. Led raising expense yet demesne weather musical. Me mr what park next busy ever. Elinor her his secure far twenty eat object. Late any far saw size want man. Which way you wrong add shall one. As guest right of he scale these. Horses nearer oh elinor of denote.
+x
+How promotion excellent curiosity yet attempted happiness. Gay prosperous impression had conviction. For every delay death ask style. Me mean able my by in they. Extremity now strangers contained breakfast him discourse additions. Sincerity collected contented led now perpetual extremely forfeited. &lt;/p&gt;
+&lt;p&gt;By impossible of in difficulty discovered celebrated ye. Justice joy manners boy met resolve produce. Bed head loud next plan rent had easy add him. As earnestly shameless elsewhere defective estimable fulfilled of. Esteem my advice it an excuse enable. Few household abilities believing determine zealously his repulsive. To open draw dear be by side like. &lt;/p&gt;
+&lt;p&gt;Arrival entered an if drawing request. How daughters not promotion few knowledge contented. Yet winter law behind number stairs garret excuse. Minuter we natural conduct gravity if pointed oh no. Am immediate unwilling of attempted admitting disposing it. Handsome opinions on am at it ladyship.
+&lt;div&gt;
+          &lt;div
+            class=&quot;gatsby-resp-iframe-wrapper&quot;
+            style=&quot;padding-bottom: 56.25%; position: relative; height: 0; overflow: hidden;margin-bottom: 1.0725rem&quot;
+          &gt;
+            &lt;iframe src=&quot;https://www.youtube.com/embed/2Xc9gXyf2G4&quot; frameborder=&quot;0&quot; allow=&quot;autoplay; encrypted-media&quot; allowfullscreen style=&quot;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+          &quot;&gt;&lt;/iframe&gt;
+          &lt;/div&gt;
+          &lt;/div&gt;&lt;/iframe&gt;
+Performed suspicion in certainty so frankness by attention pretended. Newspaper or in tolerably education enjoyment. Extremity excellent certainty discourse sincerity no he so resembled. Joy house worse arise total boy but. Elderly up chicken do at feeling is. Like seen drew no make fond at on rent. Behaviour extremely her explained situation yet september gentleman are who. Is thought or pointed hearing he. &lt;/p&gt;
+&lt;p&gt;As it so contrasted oh estimating instrument. Size like body some one had. Are conduct viewing boy minutes warrant expense. Tolerably behaviour may admitting daughters offending her ask own. Praise effect wishes change way and any wanted. Lively use looked latter regard had. Do he it part more last in. Merits ye if mr narrow points. Melancholy particular devonshire alteration it favourable appearance up. &lt;/p&gt;
+&lt;p&gt;She travelling acceptance men unpleasant her especially entreaties law. Law forth but end any arise chief arose. Old her say learn these large. Joy fond many ham high seen this. Few preferred continual sir led incommode neglected. Discovered too old insensible collecting unpleasant but invitation. &lt;/p&gt;</content:encoded></item><item><title><![CDATA[Non blocking single producer many consumers queue]]></title><description><![CDATA[Non-blocking algorithms allows threads to access shared state without blocking: locks, mutexes, semaphores etc. A blocking concurrency algorithm is an algorithm which can block the thread until the action can be performed safely.   The queue is…]]></description><link>https://victoriaz.netlify.comundefined</link><guid isPermaLink="true">https://victoriaz.netlify.comundefined</guid><pubDate>Fri, 16 Mar 2018 10:30:00 GMT</pubDate><content:encoded>&lt;div style=&quot;text-align: center; width: 100%; margin-bottom: 50px;&quot;&gt;
+    &lt;img src=&quot;/queue-ad096102018e606977143785d91ef139.gif&quot; width=&quot;80%&quot;&gt;
+&lt;/div&gt;
+&lt;p&gt;Non-blocking algorithms allows threads to access shared state without blocking: locks, mutexes, semaphores etc. A blocking concurrency algorithm is an algorithm which can block the thread until the action can be performed safely.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;package&lt;/span&gt; architect
+&lt;span class=&quot;token keyword&quot;&gt;package&lt;/span&gt; duna
+&lt;span class=&quot;token keyword&quot;&gt;package&lt;/span&gt; kernel
+
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; java&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;lang&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;Throwable
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; scala&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;util&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; Either&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Left&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; Right &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; scala&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;runtime&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ScalaRunTime&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;_
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; scala&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;reflect&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ClassTag 
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; java&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;util&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;concurrent&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;ConcurrentLinkedQueue
+&lt;span class=&quot;token keyword&quot;&gt;import&lt;/span&gt; scala&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;collection&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;immutable&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;SortedMap
+
+&lt;span class=&quot;token keyword&quot;&gt;trait&lt;/span&gt; QueueIssue&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; message&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;String&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; CantDequeueEmptyQueue&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;extends&lt;/span&gt; QueueIssue&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;override&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; message&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token string&quot;&gt;&quot;Can&apos;t dequeue for an empty queue.&quot;&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;  The queue is actually a circular buffer and two pointers, which point to the next writable element and the next readable element.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;class&lt;/span&gt; Queue&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;
+
+        &lt;span class=&quot;token annotation punctuation&quot;&gt;@specialized&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token builtin&quot;&gt;Short&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Char&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Float&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Long&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Double&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;AnyRef&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; A&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ClassTag
+
+    &lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; size&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;Both pointers start from the zero element. They have &lt;a href=&quot;http://tutorials.jenkov.com/java-concurrency/volatile.html&quot;&gt;@volatile&lt;/a&gt; annotation, because we need every thread to have an access to the newest value of the variable.
+Here is the write pointer.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token annotation punctuation&quot;&gt;@volatile&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; writePointer&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;And the read pointer.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token annotation punctuation&quot;&gt;@volatile&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;var&lt;/span&gt; readPointer&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;We calculate an array size available on the machine. &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; availableSize &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; runtime &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; Runtime&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;getRuntime&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// Hard coded values are: 32bits is Int size, 4 - memory share&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// TODO: change integer zite to A size&lt;/span&gt;
+    &lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;runtime&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;freeMemory&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;4&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;token number&quot;&gt;32&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;toInt 
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;We check the input size. If it is less than one, we make 100000 array (because I want so). &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; actualSize &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; size &lt;span class=&quot;token keyword&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; number &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;number &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;100000&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; number &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;number &lt;span class=&quot;token operator&quot;&gt;&gt;&lt;/span&gt; availableSize&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; availableSize
+
+    &lt;span class=&quot;token keyword&quot;&gt;case&lt;/span&gt; number &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; number
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;Then we calculate physical location of the pointers in the array buffer. It should be from 0 to actual array size. So we need to find a reminder of current pointer position and actual array size. &lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; physicalReadPointer&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+    readPointer  &lt;span class=&quot;token operator&quot;&gt;%&lt;/span&gt; actualSize
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; physicalWritePointer&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Int&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+    writePointer  &lt;span class=&quot;token operator&quot;&gt;%&lt;/span&gt; actualSize
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;Here is a buffer array, where we keep all the data.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; store&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Array&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; Array&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;actualSize&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;And the next one is for backpressure. I’ll write about it below…&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; tmpStore&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; ConcurrentLinkedQueue&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;new&lt;/span&gt; ConcurrentLinkedQueue&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;Whenever a write pointer is bigger than array size, we put next elements into the tmpStore. It is a backpressure strategy. If a producer is faster than consumer, then the default array is not enough. We start using tmpStore, which help us under heavy load. But it can cause an OutOfMemoryException exeption. Type of the tmpStore is ConcurrentLinkedQueue, so it is not limited and can be dynamically resized. Why we didn’t do it before?
+Because any linked list based data structure with unknown length at runtime replaces itself with a new allocated structure when the capacity is exceeded. A new structure is allocated and a previous one is collected multiple times. This process can generate a lot of garbage and lead to memory leak.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; enqueue&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;=&gt;&lt;/span&gt; A&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Either&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; QueueIssue&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;token comment&quot;&gt;// The queue is full, can&apos;t rewrite an element which hasn&apos;t been read&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;writePointer &lt;span class=&quot;token operator&quot;&gt;&gt;=&lt;/span&gt; actualSize&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; 
+
+        tmpStore&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;add&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;token comment&quot;&gt;// Enqueue a new element&lt;/span&gt;
+        store&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;update&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;phisicalWritePointer&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; 
+
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+     &lt;span class=&quot;token comment&quot;&gt;// Move writePointer to the next slot&lt;/span&gt;
+    &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; newWritePointer &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; writePointer &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt;
+
+    writePointer &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; newWritePointer
+
+    Left&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;value&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;The next method extracts next value from the queue.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; dequeue&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; Either&lt;span class=&quot;token punctuation&quot;&gt;[&lt;/span&gt;A&lt;span class=&quot;token punctuation&quot;&gt;,&lt;/span&gt; QueueIssue&lt;span class=&quot;token punctuation&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+    &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;isEmpty&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt; 
+    
+        Right&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;CantDequeueEmptyQueue&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+        &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; res &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token keyword&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;readPointer &lt;span class=&quot;token operator&quot;&gt;&amp;lt;&lt;/span&gt; actualSize &lt;span class=&quot;token operator&quot;&gt;||&lt;/span&gt; tmpStore&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;isEmpty&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+            &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; value &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; store&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;phisicalReadPointer&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; 
+
+            value
+
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;token keyword&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+            
+            &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; dec &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; tmpStore&lt;span class=&quot;token punctuation&quot;&gt;.&lt;/span&gt;poll
+
+            store&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;phisicalReadPointer&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; dec
+
+            dec
+
+        &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+        
+        &lt;span class=&quot;token keyword&quot;&gt;val&lt;/span&gt; newReadPointer &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; readPointer &lt;span class=&quot;token operator&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;token number&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;token comment&quot;&gt;// the next pointer can point at an empty slot, will check on the next dequeue&lt;/span&gt;
+        
+        readPointer &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; newReadPointer
+
+        Left&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;res&lt;span class=&quot;token punctuation&quot;&gt;)&lt;/span&gt;
+
+    &lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;
+&lt;p&gt;The queue is empty or the next pointer points to an empty slot.&lt;/p&gt;
+&lt;div class=&quot;gatsby-highlight&quot;&gt;
+      &lt;pre class=&quot;language-scalascala&quot;&gt;&lt;code class=&quot;language-scalascala&quot;&gt;&lt;span class=&quot;token keyword&quot;&gt;def&lt;/span&gt; isEmpty&lt;span class=&quot;token operator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;token builtin&quot;&gt;Boolean&lt;/span&gt; &lt;span class=&quot;token operator&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;token punctuation&quot;&gt;{&lt;/span&gt;
+
+    readPointer &lt;span class=&quot;token operator&quot;&gt;==&lt;/span&gt; writePointer
+
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;token punctuation&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+      &lt;/div&gt;</content:encoded></item></channel></rss>
