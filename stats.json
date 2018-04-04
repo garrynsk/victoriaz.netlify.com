@@ -1,8 +1,8 @@
 {
   "assetsByChunkName": {
     "component---src-layouts-index-tsx": [
-      "component---src-layouts-index-tsx-2d5288ab6afd890cc6e1.js",
-      "component---src-layouts-index-tsx-2d5288ab6afd890cc6e1.js.map"
+      "component---src-layouts-index-tsx-2d6b04fa20cad41b2f8d.js",
+      "component---src-layouts-index-tsx-2d6b04fa20cad41b2f8d.js.map"
     ],
     "component---src-templates-post-tsx": [
       "component---src-templates-post-tsx-dce05e9e8ba9f9820ead.js",
@@ -41,9 +41,9 @@
       "component---src-pages-about-tsx-3aa86c15dde050093a1d.js.map"
     ],
     "commons": [
-      "commons-33bc2bff23ac22786971.js",
+      "commons-2a562641d579465407d7.js",
       "build-js-styles.css",
-      "commons-33bc2bff23ac22786971.js.map",
+      "commons-2a562641d579465407d7.js.map",
       "build-js-styles.css.map"
     ],
     "path---monads": [
