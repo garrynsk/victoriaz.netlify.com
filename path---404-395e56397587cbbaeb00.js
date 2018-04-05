@@ -1,2 +1,2 @@
-webpackJsonp([0xe70826b53c04],{760:function(t,e){t.exports={data:{site:{siteMetadata:{siteUrl:"https://victoriaz.netlify.com",siteTitle:"VictoriaZ programming sketches",siteLogo:"/img/Flying_Herk_in_the_Clouds.svg"}}},pathContext:{}}}});
+webpackJsonp([0xe70826b53c04],{761:function(t,e){t.exports={data:{site:{siteMetadata:{siteUrl:"https://victoriaz.netlify.com",siteTitle:"VictoriaZ programming sketches",siteLogo:"/img/Flying_Herk_in_the_Clouds.svg"}}},pathContext:{}}}});
 //# sourceMappingURL=path---404-395e56397587cbbaeb00.js.map
