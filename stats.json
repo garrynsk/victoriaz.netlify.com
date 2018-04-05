@@ -1,8 +1,8 @@
 {
   "assetsByChunkName": {
     "component---src-layouts-index-tsx": [
-      "component---src-layouts-index-tsx-37dc929bf2c0d094b1a1.js",
-      "component---src-layouts-index-tsx-37dc929bf2c0d094b1a1.js.map"
+      "component---src-layouts-index-tsx-3c8d9a90cd59394800a8.js",
+      "component---src-layouts-index-tsx-3c8d9a90cd59394800a8.js.map"
     ],
     "component---src-templates-post-tsx": [
       "component---src-templates-post-tsx-dce05e9e8ba9f9820ead.js",
@@ -29,8 +29,8 @@
       "component---node-modules-gatsby-plugin-offline-app-shell-js-5c4c5a0f7af9dc69d6d7.js.map"
     ],
     "path---mock-article": [
-      "path---mock-article-05ecd24e8d20b70c4a67.js",
-      "path---mock-article-05ecd24e8d20b70c4a67.js.map"
+      "path---mock-article-3f8700cfafc59536635c.js",
+      "path---mock-article-3f8700cfafc59536635c.js.map"
     ],
     "path---index": [
       "path---index-0e918c4a8d504b4616bf.js",
@@ -41,14 +41,14 @@
       "component---src-pages-about-tsx-3aa86c15dde050093a1d.js.map"
     ],
     "commons": [
-      "commons-2a562641d579465407d7.js",
+      "commons-934bdcbbfcd8273ee2c7.js",
       "build-js-styles.css",
-      "commons-2a562641d579465407d7.js.map",
+      "commons-934bdcbbfcd8273ee2c7.js.map",
       "build-js-styles.css.map"
     ],
     "path---monads": [
-      "path---monads-8f4d2da1c9e6ed10af82.js",
-      "path---monads-8f4d2da1c9e6ed10af82.js.map"
+      "path---monads-d5fd1ddd97b87f8671f1.js",
+      "path---monads-d5fd1ddd97b87f8671f1.js.map"
     ],
     "component---src-pages-404-tsx": [
       "component---src-pages-404-tsx-4838546371c7dc62f4b3.js",
@@ -79,12 +79,12 @@
       "path---offline-plugin-app-shell-fallback-a0e39f21c11f6a62c5ab.js.map"
     ],
     "component---src-pages-index-tsx": [
-      "component---src-pages-index-tsx-957c9599f685edfaefbc.js",
-      "component---src-pages-index-tsx-957c9599f685edfaefbc.js.map"
+      "component---src-pages-index-tsx-bde7096004ac1087ecdd.js",
+      "component---src-pages-index-tsx-bde7096004ac1087ecdd.js.map"
     ],
     "path---non-blocking-queue": [
-      "path---non-blocking-queue-d1c67adbc23664a22f7e.js",
-      "path---non-blocking-queue-d1c67adbc23664a22f7e.js.map"
+      "path---non-blocking-queue-194519396e8f50747521.js",
+      "path---non-blocking-queue-194519396e8f50747521.js.map"
     ],
     "app": [
       "app-9f66a2619c5041699525.js",
