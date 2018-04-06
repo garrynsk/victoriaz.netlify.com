@@ -1,8 +1,8 @@
 {
   "assetsByChunkName": {
     "component---src-layouts-index-tsx": [
-      "component---src-layouts-index-tsx-e6b729dbdba7b9b9e9cf.js",
-      "component---src-layouts-index-tsx-e6b729dbdba7b9b9e9cf.js.map"
+      "component---src-layouts-index-tsx-f7c69b149191a844e7e9.js",
+      "component---src-layouts-index-tsx-f7c69b149191a844e7e9.js.map"
     ],
     "component---src-templates-post-tsx": [
       "component---src-templates-post-tsx-f99dc04d70221e870f9f.js",
@@ -41,9 +41,9 @@
       "component---src-pages-about-tsx-3aa86c15dde050093a1d.js.map"
     ],
     "commons": [
-      "commons-3c81d1a2713b809ab44b.js",
+      "commons-340152448d87188cb6a3.js",
       "build-js-styles.css",
-      "commons-3c81d1a2713b809ab44b.js.map",
+      "commons-340152448d87188cb6a3.js.map",
       "build-js-styles.css.map"
     ],
     "path---monads": [
@@ -87,9 +87,9 @@
       "path---non-blocking-queue-194519396e8f50747521.js.map"
     ],
     "app": [
-      "app-da998ceca192a33763fd.js",
+      "app-3deafb9d555403cbd51d.js",
       "build-js-styles.css",
-      "app-da998ceca192a33763fd.js.map",
+      "app-3deafb9d555403cbd51d.js.map",
       "build-js-styles.css.map"
     ],
     "path---tags-random": [
@@ -111,12 +111,6 @@
     "path---about": [
       "path---about-e3c369c422250efbe382.js",
       "path---about-e3c369c422250efbe382.js.map"
-    ],
-    "total-build": [
-      "total-build.js",
-      "build-js-styles.css",
-      "total-build.js.map",
-      "build-js-styles.css.map"
     ]
   }
 }
