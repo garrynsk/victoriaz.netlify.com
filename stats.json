@@ -1,12 +1,12 @@
 {
   "assetsByChunkName": {
     "component---src-layouts-index-tsx": [
-      "component---src-layouts-index-tsx-630279ca848d66ea097e.js",
-      "component---src-layouts-index-tsx-630279ca848d66ea097e.js.map"
+      "component---src-layouts-index-tsx-e6b729dbdba7b9b9e9cf.js",
+      "component---src-layouts-index-tsx-e6b729dbdba7b9b9e9cf.js.map"
     ],
     "component---src-templates-post-tsx": [
-      "component---src-templates-post-tsx-dce05e9e8ba9f9820ead.js",
-      "component---src-templates-post-tsx-dce05e9e8ba9f9820ead.js.map"
+      "component---src-templates-post-tsx-f99dc04d70221e870f9f.js",
+      "component---src-templates-post-tsx-f99dc04d70221e870f9f.js.map"
     ],
     "path---tags": [
       "path---tags-64f4a56185f2b819a06b.js",
@@ -41,9 +41,9 @@
       "component---src-pages-about-tsx-3aa86c15dde050093a1d.js.map"
     ],
     "commons": [
-      "commons-2de089b007aa8b8d5cd7.js",
+      "commons-3c81d1a2713b809ab44b.js",
       "build-js-styles.css",
-      "commons-2de089b007aa8b8d5cd7.js.map",
+      "commons-3c81d1a2713b809ab44b.js.map",
       "build-js-styles.css.map"
     ],
     "path---monads": [
@@ -111,6 +111,12 @@
     "path---about": [
       "path---about-e3c369c422250efbe382.js",
       "path---about-e3c369c422250efbe382.js.map"
+    ],
+    "total-build": [
+      "total-build.js",
+      "build-js-styles.css",
+      "total-build.js.map",
+      "build-js-styles.css.map"
     ]
   }
 }
