@@ -1,2 +1,0 @@
-webpackJsonp([55702396619907],{773:function(t,e){t.exports={data:{site:{siteMetadata:{siteUrl:"https://victoriaz.netlify.com",siteTitle:"VictoriaZ programming sketches",siteLogo:"/img/Flying_Herk_in_the_Clouds.svg"}},allMarkdownRemark:{group:[{fieldValue:"Scala",totalCount:2},{fieldValue:"monads",totalCount:1},{fieldValue:"non-blocking",totalCount:1},{fieldValue:"queue",totalCount:1},{fieldValue:"random",totalCount:1}]}},pathContext:{}}}});
-//# sourceMappingURL=path---tags-64f4a56185f2b819a06b.js.map

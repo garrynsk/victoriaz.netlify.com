@@ -1,0 +1,2 @@
+webpackJsonp([79465324930463],{770:function(t,e){t.exports={data:{site:{siteMetadata:{siteUrl:"https://victoriaz.netlify.com",siteTitle:"VictoriaZ programming sketches",siteLogo:"/img/twitterImg.jpg"}},allMarkdownRemark:{totalCount:1,edges:[{node:{frontmatter:{title:"Non blocking single producer many consumers queue",date:"March 16, 2018",path:"/non-blocking-queue"}}}]}},pathContext:{tag:"queue"}}}});
+//# sourceMappingURL=path---tags-queue-39420a3b21621e73505f.js.map

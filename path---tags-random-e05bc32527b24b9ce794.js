@@ -1,2 +1,0 @@
-webpackJsonp([0xdcbbbbc422b6],{771:function(t,e){t.exports={data:{site:{siteMetadata:{siteUrl:"https://victoriaz.netlify.com",siteTitle:"VictoriaZ programming sketches",siteLogo:"/img/Flying_Herk_in_the_Clouds.svg"}},allMarkdownRemark:{totalCount:1,edges:[{node:{frontmatter:{title:"Random text generator",date:"March 17, 2018",path:"/mock-article"}}}]}},pathContext:{tag:"random"}}}});
-//# sourceMappingURL=path---tags-random-e05bc32527b24b9ce794.js.map

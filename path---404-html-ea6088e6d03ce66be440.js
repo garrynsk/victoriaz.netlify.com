@@ -1,0 +1,2 @@
+webpackJsonp([0xa2868bfb69fc],{759:function(t,i){t.exports={data:{site:{siteMetadata:{siteUrl:"https://victoriaz.netlify.com",siteTitle:"VictoriaZ programming sketches",siteLogo:"/img/twitterImg.jpg"}}},pathContext:{}}}});
+//# sourceMappingURL=path---404-html-ea6088e6d03ce66be440.js.map

@@ -1,2 +1,0 @@
-webpackJsonp([0xb3a4940bce48],{768:function(t,e){t.exports={data:{site:{siteMetadata:{siteUrl:"https://victoriaz.netlify.com",siteTitle:"VictoriaZ programming sketches",siteLogo:"/img/Flying_Herk_in_the_Clouds.svg"}},allMarkdownRemark:{totalCount:1,edges:[{node:{frontmatter:{title:"What are they, monads, angels or demons?",date:"March 26, 2018",path:"/monads"}}}]}},pathContext:{tag:"monads"}}}});
-//# sourceMappingURL=path---tags-monads-0bb9a075553fd464c879.js.map
