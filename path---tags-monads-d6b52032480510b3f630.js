@@ -1,0 +1,2 @@
+webpackJsonp([0xb3a4940bce48],{763:function(t,a){t.exports={data:{site:{siteMetadata:{siteUrl:"https://victoriaz.netlify.com",siteTitle:"VictoriaZ programming sketches",siteLogo:"/img/twitterImg.jpg"}},allMarkdownRemark:{totalCount:1,edges:[{node:{frontmatter:{title:"Why do I need monads, anyway?",date:"March 26, 2018",path:"/monads"}}}]}},pathContext:{tag:"monads"}}}});
+//# sourceMappingURL=path---tags-monads-d6b52032480510b3f630.js.map

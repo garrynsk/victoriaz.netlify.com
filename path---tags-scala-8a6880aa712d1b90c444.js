@@ -1,2 +1,0 @@
-webpackJsonp([0xe18631963e2f],{770:function(t,e){t.exports={data:{site:{siteMetadata:{siteUrl:"https://victoriaz.netlify.com",siteTitle:"VictoriaZ programming sketches",siteLogo:"/img/twitterImg.jpg"}},allMarkdownRemark:{totalCount:2,edges:[{node:{frontmatter:{title:"What are they, monads, angels or demons?",date:"March 26, 2018",path:"/monads"}}},{node:{frontmatter:{title:"Non blocking single producer many consumers queue",date:"March 16, 2018",path:"/non-blocking-queue"}}}]}},pathContext:{tag:"Scala"}}}});
-//# sourceMappingURL=path---tags-scala-8a6880aa712d1b90c444.js.map

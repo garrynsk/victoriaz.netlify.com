@@ -1,0 +1,2 @@
+webpackJsonp([0xe18631963e2f],{766:function(t,e){t.exports={data:{site:{siteMetadata:{siteUrl:"https://victoriaz.netlify.com",siteTitle:"VictoriaZ programming sketches",siteLogo:"/img/twitterImg.jpg"}},allMarkdownRemark:{totalCount:2,edges:[{node:{frontmatter:{title:"Why do I need monads, anyway?",date:"March 26, 2018",path:"/monads"}}},{node:{frontmatter:{title:"Non blocking single producer many consumers queue",date:"March 16, 2018",path:"/non-blocking-queue"}}}]}},pathContext:{tag:"Scala"}}}});
+//# sourceMappingURL=path---tags-scala-362d54aa470b42f0a1dd.js.map

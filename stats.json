@@ -1,20 +1,20 @@
 {
   "assetsByChunkName": {
     "component---src-layouts-index-tsx": [
-      "component---src-layouts-index-tsx-be63e4ed60eef9f39f28.js",
-      "component---src-layouts-index-tsx-be63e4ed60eef9f39f28.js.map"
+      "component---src-layouts-index-tsx-5eb7cf8677f275b5ae38.js",
+      "component---src-layouts-index-tsx-5eb7cf8677f275b5ae38.js.map"
     ],
     "component---src-templates-post-tsx": [
-      "component---src-templates-post-tsx-baad8940747bb72677bd.js",
-      "component---src-templates-post-tsx-baad8940747bb72677bd.js.map"
+      "component---src-templates-post-tsx-6b4c9080d42db89da43d.js",
+      "component---src-templates-post-tsx-6b4c9080d42db89da43d.js.map"
     ],
     "path---tags": [
-      "path---tags-bec41685887b2e6ae15f.js",
-      "path---tags-bec41685887b2e6ae15f.js.map"
+      "path---tags-f34d739b37a0a4aeb476.js",
+      "path---tags-f34d739b37a0a4aeb476.js.map"
     ],
     "path---": [
-      "path----554dcced2edddfd33094.js",
-      "path----554dcced2edddfd33094.js.map"
+      "path----a84644907ed66e0563be.js",
+      "path----a84644907ed66e0563be.js.map"
     ],
     "path---tags-queue": [
       "path---tags-queue-39420a3b21621e73505f.js",
@@ -28,27 +28,23 @@
       "component---node-modules-gatsby-plugin-offline-app-shell-js-5c4c5a0f7af9dc69d6d7.js",
       "component---node-modules-gatsby-plugin-offline-app-shell-js-5c4c5a0f7af9dc69d6d7.js.map"
     ],
-    "path---mock-article": [
-      "path---mock-article-1fa054f3640c39ee1a99.js",
-      "path---mock-article-1fa054f3640c39ee1a99.js.map"
-    ],
     "path---index": [
-      "path---index-b1bdf1e6e48c72d1871e.js",
-      "path---index-b1bdf1e6e48c72d1871e.js.map"
+      "path---index-adf6d91e7ee6b7e49da6.js",
+      "path---index-adf6d91e7ee6b7e49da6.js.map"
     ],
     "component---src-pages-about-tsx": [
       "component---src-pages-about-tsx-3aa86c15dde050093a1d.js",
       "component---src-pages-about-tsx-3aa86c15dde050093a1d.js.map"
     ],
     "commons": [
-      "commons-013f19f86272fe3a64b5.js",
+      "commons-110d8412c7281b7bddf9.js",
       "build-js-styles.css",
-      "commons-013f19f86272fe3a64b5.js.map",
+      "commons-110d8412c7281b7bddf9.js.map",
       "build-js-styles.css.map"
     ],
     "path---monads": [
-      "path---monads-bb0ad8ab70599f4da0f4.js",
-      "path---monads-bb0ad8ab70599f4da0f4.js.map"
+      "path---monads-c7c16d5b90d5a69294f4.js",
+      "path---monads-c7c16d5b90d5a69294f4.js.map"
     ],
     "component---src-pages-404-tsx": [
       "component---src-pages-404-tsx-4838546371c7dc62f4b3.js",
@@ -63,12 +59,12 @@
       "component---src-pages-repositories-tsx-01b54fe22f794e23755e.js.map"
     ],
     "path---tags-monads": [
-      "path---tags-monads-65b2983bd651da8c3640.js",
-      "path---tags-monads-65b2983bd651da8c3640.js.map"
+      "path---tags-monads-d6b52032480510b3f630.js",
+      "path---tags-monads-d6b52032480510b3f630.js.map"
     ],
     "path---repositories": [
-      "path---repositories-13667dadb00debde76d8.js",
-      "path---repositories-13667dadb00debde76d8.js.map"
+      "path---repositories-2ff3995785c34aa2eb2d.js",
+      "path---repositories-2ff3995785c34aa2eb2d.js.map"
     ],
     "path---tags-non-blocking": [
       "path---tags-non-blocking-2341193382c05e3ab042.js",
@@ -87,18 +83,14 @@
       "path---non-blocking-queue-9737195ccfa40ee6ad1f.js.map"
     ],
     "app": [
-      "app-52c40e94a66e0a1c151f.js",
+      "app-86afbf27fa68e735b051.js",
       "build-js-styles.css",
-      "app-52c40e94a66e0a1c151f.js.map",
+      "app-86afbf27fa68e735b051.js.map",
       "build-js-styles.css.map"
     ],
-    "path---tags-random": [
-      "path---tags-random-3504d87b58de8b5ec43a.js",
-      "path---tags-random-3504d87b58de8b5ec43a.js.map"
-    ],
     "path---tags-scala": [
-      "path---tags-scala-8a6880aa712d1b90c444.js",
-      "path---tags-scala-8a6880aa712d1b90c444.js.map"
+      "path---tags-scala-362d54aa470b42f0a1dd.js",
+      "path---tags-scala-362d54aa470b42f0a1dd.js.map"
     ],
     "path---404": [
       "path---404-ea6088e6d03ce66be440.js",
