@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[VictoriaZ programming sketches]]></title><description><![CDATA[A Scala programming blog. Ideas, opinions and technologies.]]></description><link>https://victoriaz.netlify.com</link><generator>RSS for Node</generator><lastBuildDate>Tue, 10 Apr 2018 01:37:32 GMT</lastBuildDate><item><title><![CDATA[Why do I need monads, anyway?]]></title><description><![CDATA[You’ve, probably, heard about them many times, now is the next one! :) I learned about monads, when I started with Scala. These large libraries Scalaz, cats and strange cryptic symbols, you know… It was my second push towards category theory (the…]]></description><link>https://victoriaz.netlify.comundefined</link><guid isPermaLink="true">https://victoriaz.netlify.comundefined</guid><pubDate>Mon, 26 Mar 2018 10:30:00 GMT</pubDate><content:encoded>&lt;p&gt;You’ve, probably, heard about them many times, now is the next one! :)&lt;/p&gt;
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[VictoriaZ programming sketches]]></title><description><![CDATA[A Scala programming blog. Ideas, opinions and technologies.]]></description><link>https://victoriaz.netlify.com</link><generator>RSS for Node</generator><lastBuildDate>Tue, 10 Apr 2018 10:46:43 GMT</lastBuildDate><item><title><![CDATA[Why do I need monads, anyway?]]></title><description><![CDATA[You’ve, probably, heard about them many times, now is the next one! :) I learned about monads, when I started with Scala. These large libraries Scalaz, cats and strange cryptic symbols, you know… It was my second push towards category theory (the…]]></description><link>https://victoriaz.netlify.comundefined</link><guid isPermaLink="true">https://victoriaz.netlify.comundefined</guid><pubDate>Mon, 26 Mar 2018 10:30:00 GMT</pubDate><content:encoded>&lt;p&gt;You’ve, probably, heard about them many times, now is the next one! :)&lt;/p&gt;
 &lt;p&gt;I learned about monads, when I started with Scala. These large libraries Scalaz, cats and strange cryptic symbols, you know… It was my second push towards category theory (the first one was when I studied math at the university). So, I read Steve Awodey’s “Category Theoryried to read “Categories for the Working Mathematician” by Saunders Mac Lane, if you know what I mean.&lt;/p&gt;
 &lt;p&gt;Great, great, great experience!!! Every cathegory is an algebra, every monad is a cathegory. Every my flatMap is a whole world. Awesome.&lt;/p&gt;
 &lt;p&gt;I was fanatical about functional programming and an ardent devotee of immutable data.
@@ -118,7 +118,7 @@ c. Read/write state&lt;/li&gt;
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/functional-0658e1a27cd5ed6572b01f4f4d6bf90c-029df.png&quot;
+    href=&quot;/static/functional-e1640959e9ca7bed92ccd69344ae8977-029df.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -130,21 +130,21 @@ c. Read/write state&lt;/li&gt;
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 44.38888888888889%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAIAAAC9o5sfAAAACXBIWXMAAAsSAAALEgHS3X78AAABpElEQVQoz31RS0sCURT2t/QLok20qB8QQW0jCgIXFbaJWrWIWrioyCJIehhFD8pCikAXaWb4nApTK8vJfEaNOo4zo+O87ti9TlEhdDhcvnP4vnPPQ1P71xQFNIb5xDFL2CHQNPLrDnnIVADfNO6nixmVEfNNRt1TP2IAwBf9l6BUJGMRL4pqtaOVkaDnECapjCXr7crg7j8/qwKqQJDEGwQpPLi/OLRrGGZo6uZi7WyjnyzkxUr25byZCXW8hycS0VMkFgU+4LRyXKVE5tZntH67OYlH5nTNts0BmsrhD74dfVvI1hv27ckSd+c2xt19ych6/NGKxFuG6dHulgQsZZqd6Gm6uTrFnOaFsfal8dYIZrvHDnfnu2xbg9eXpnzWn8Z0r65OOr2N2oaDmTeXD1bnckQWc51YTPpkLPQcctx6ThyWhUz89iPlLxIvQZex8P7E5gPFlJljEumAtsqxGjgqzwu8KMFKXJWrCgLan6KwlUqVF2sKkIFS5kSapsplFnF4qVRiGJqURAG1DWQZuroztPY6kOum3laWJZgGQPmmfB3/Ewae17J+UWzJAAAAAElFTkSuQmCC&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 44.38888888888889%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAIAAAC9o5sfAAAACXBIWXMAAAsSAAALEgHS3X78AAABoElEQVQoz31RS0sCURT2t/QLalWbaB9B64iiRRvBVdSqRdQiCKOSIKlUih6UhShBLnoqmqMlpvZ0Mp9Ro87ozOh1XnfsXqeoEDocLt85fN+556Fr/GuqClvDYuqQp04R0LXym4542DSA3ixJsExOYySIyUff1I8YQvhF/yWoMHQifoWjRuNgRR/x7+NkzpG/6suRvj8/a4JyiaKpNwQyZGTXpN9e0nNs+eZ87cgyRJeKYi2fPGnnoj3vsYnUowuLJVEgLo4BqFXowvrMKHFqT5Nxo6HdbRtmywXyPrA12xV1D8QCO4oMbn3mpH8wHbckH46xeGNx2tDfkUKlrHMT/W03Xlfowr4w1m0a74yH3Heh/e35PvfGyPWlpZgPZK8Nr55eLruJ20aD2W3Le6vGApUPeZwO62w6EX2Onof9zjPHQi4Z/sgQDPUS8ZpL7098Mchk7IBLZYOjdcDr0KiCIIqShCqBOqiLIt6fqvI1UBfkhgoVqNaAxLJMtcpjjiBXKhzH0rIk4rahoiDXdobX3gRK07TbKoqM0hCq35Sv438CCqfXtgqBI5UAAAAASUVORK5CYII=&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
         alt=&quot;functional&quot;
         title=&quot;&quot;
-        src=&quot;/static/functional-0658e1a27cd5ed6572b01f4f4d6bf90c-fb8a0.png&quot;
-        srcset=&quot;/static/functional-0658e1a27cd5ed6572b01f4f4d6bf90c-1a291.png 148w,
-/static/functional-0658e1a27cd5ed6572b01f4f4d6bf90c-2bc4a.png 295w,
-/static/functional-0658e1a27cd5ed6572b01f4f4d6bf90c-fb8a0.png 590w,
-/static/functional-0658e1a27cd5ed6572b01f4f4d6bf90c-526de.png 885w,
-/static/functional-0658e1a27cd5ed6572b01f4f4d6bf90c-fa2eb.png 1180w,
-/static/functional-0658e1a27cd5ed6572b01f4f4d6bf90c-08f6a.png 1770w,
-/static/functional-0658e1a27cd5ed6572b01f4f4d6bf90c-029df.png 1800w&quot;
+        src=&quot;/static/functional-e1640959e9ca7bed92ccd69344ae8977-fb8a0.png&quot;
+        srcset=&quot;/static/functional-e1640959e9ca7bed92ccd69344ae8977-1a291.png 148w,
+/static/functional-e1640959e9ca7bed92ccd69344ae8977-2bc4a.png 295w,
+/static/functional-e1640959e9ca7bed92ccd69344ae8977-fb8a0.png 590w,
+/static/functional-e1640959e9ca7bed92ccd69344ae8977-526de.png 885w,
+/static/functional-e1640959e9ca7bed92ccd69344ae8977-fa2eb.png 1180w,
+/static/functional-e1640959e9ca7bed92ccd69344ae8977-08f6a.png 1770w,
+/static/functional-e1640959e9ca7bed92ccd69344ae8977-029df.png 1800w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
       /&gt;
     &lt;/span&gt;
@@ -303,7 +303,7 @@ sum&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=
 &lt;p&gt;
   &lt;a
     class=&quot;gatsby-resp-image-link&quot;
-    href=&quot;/static/Optimus_Prime-c0111f504652673d8ec93a44bc170e5d-c86e7.png&quot;
+    href=&quot;/static/Optimus_Prime-f0836c49db6ba5a471679068adea6fd9-c86e7.png&quot;
     style=&quot;display: block&quot;
     target=&quot;_blank&quot;
     rel=&quot;noopener&quot;
@@ -315,18 +315,18 @@ sum&lt;span class=&quot;token punctuation&quot;&gt;(&lt;/span&gt;&lt;span class=
   &gt;
     &lt;span
       class=&quot;gatsby-resp-image-background-image&quot;
-      style=&quot;padding-bottom: 128.85496183206106%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,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&apos;); background-size: cover; display: block;&quot;
+      style=&quot;padding-bottom: 128.85496183206106%; position: relative; bottom: 0; left: 0; background-image: url(&apos;data:image/png;base64,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&apos;); background-size: cover; display: block;&quot;
     &gt;
       &lt;img
         class=&quot;gatsby-resp-image-image&quot;
         style=&quot;width: 100%; height: 100%; margin: 0; vertical-align: middle; position: absolute; top: 0; left: 0; box-shadow: inset 0px 0px 0px 400px white;&quot;
         alt=&quot;Transformer&quot;
         title=&quot;&quot;
-        src=&quot;/static/Optimus_Prime-c0111f504652673d8ec93a44bc170e5d-fb8a0.png&quot;
-        srcset=&quot;/static/Optimus_Prime-c0111f504652673d8ec93a44bc170e5d-1a291.png 148w,
-/static/Optimus_Prime-c0111f504652673d8ec93a44bc170e5d-2bc4a.png 295w,
-/static/Optimus_Prime-c0111f504652673d8ec93a44bc170e5d-fb8a0.png 590w,
-/static/Optimus_Prime-c0111f504652673d8ec93a44bc170e5d-c86e7.png 655w&quot;
+        src=&quot;/static/Optimus_Prime-f0836c49db6ba5a471679068adea6fd9-fb8a0.png&quot;
+        srcset=&quot;/static/Optimus_Prime-f0836c49db6ba5a471679068adea6fd9-1a291.png 148w,
+/static/Optimus_Prime-f0836c49db6ba5a471679068adea6fd9-2bc4a.png 295w,
+/static/Optimus_Prime-f0836c49db6ba5a471679068adea6fd9-fb8a0.png 590w,
+/static/Optimus_Prime-f0836c49db6ba5a471679068adea6fd9-c86e7.png 655w&quot;
         sizes=&quot;(max-width: 590px) 100vw, 590px&quot;
       /&gt;
     &lt;/span&gt;
